@@ -6,3 +6,7 @@ feature list:
 
 - search bar
 - home page shows some ok urls and some not ok urls
+- have a list that has several sorting parameters
+- top phishing links to avoid
+- 
+- 
