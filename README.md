@@ -2,13 +2,16 @@
 
 
 # feature list:
-## flask things
+### flask things
 - search bar page
 - have a list that has several sorting parameters
+- base.html should have a way to acess every page
 
 ### things that will be handled more so by the api then by us
 
 - home page shows some ok urls and some not ok urls
 - top phishing links to avoid
-- 
-- 
+
+### things that are maybes
+
+- encode the search result page in a similar way to youtube and other popular sites' search bars (i.e. "xxxxx.yyy/search?='jebkjfsh'")
