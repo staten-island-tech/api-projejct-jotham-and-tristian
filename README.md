@@ -14,4 +14,7 @@
 
 ### things that are maybes
 
-- encode the search result page in a similar way to youtube and other popular sites' search bars (i.e. "xxxxx.yyy/search?='jebkjfsh'")
+- encode the search result page in a similar way to youtube and other popular sites' search bars (i.e. "xxxxx.yyy/search?='jebkjfsh'
+or like this: https://www.youtube.com/watch?v=rYPJYxEoPCg
+
+postman team link: https://app.getpostman.com/join-team?invite_code=c08
