@@ -178,8 +178,3 @@ app/Scripts/pip3.exe
 app/pyvenv.cfg
 app/Scripts/flask.exe
 app/Scripts/normalizer.exe
-app/Scripts/pip.exe
-app/Scripts/pip3.exe
-app/Scripts/normalizer.exe
-app/Scripts/pip.exe
-app/Scripts/pip3.exe
