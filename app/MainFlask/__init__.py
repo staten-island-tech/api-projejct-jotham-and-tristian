@@ -1,6 +1,7 @@
 import os
 
-from flask import Flask
+from flask import Flask, requests, vt, render_template
+from templates import base
 
 
 def create_app(test_config=None):
@@ -26,7 +27,12 @@ def create_app(test_config=None):
 
     # a simple page that says hello
     @app.route('/')
-    def hello():
-        return 'Hello, World!'
+    def APICall():
+        client = vt.Client("<29909ddf2acb1233e0cab2142ec6ea733e786e4d97ea4b631e70860acf0c61c6>")
+        file = client.get_object("/files/data")
+        if requests.method == "POST":
+            userfile = requests.form.get("userfile")
+            exec(open("test.py").read())
+    
 
     return app
