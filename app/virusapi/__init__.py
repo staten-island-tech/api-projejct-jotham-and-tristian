@@ -1,4 +1,4 @@
-import requests, vt, os
+import os, requests, vt
 
 from flask import Flask, render_template
 
