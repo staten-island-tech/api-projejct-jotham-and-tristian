@@ -1,4 +1,4 @@
-#!C:\Users\JOTHAM.GAO\Documents\GitHub\api-projejct-jotham-and-tristian\app\Scripts\python.exe
+#!C:\Users\TRISTIAN.BOTAN\Documents\GitHub\api-projejct-jotham-and-tristian\app\Scripts\python.exe
 # EASY-INSTALL-ENTRY-SCRIPT: 'vt==3.1.3.7','console_scripts','vt'
 import re
 import sys

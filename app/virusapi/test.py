@@ -1,5 +1,5 @@
 import vt, requests
-from templates import base
+
 
 url = 'https://www.virustotal.com/vtapi/v3/file/scan'
 filehash = requests.form.get("userfile")
