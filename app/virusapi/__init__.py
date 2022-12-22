@@ -1,7 +1,6 @@
 import os, requests, vt
 
-from flask import Flask, render_template
-
+from flask import Flask, render_template, request
 
 
 def create_app(test_config=None):
@@ -28,8 +27,8 @@ def create_app(test_config=None):
     # a simple page that says hello
     @app.route('/')
     def APICall():
-        if requests.method == "GET":
-            userfile = requests.form.get("userfile")
+        if request.method == "GET":
+            userfile = request.form.get("userfile")
             exec(open("test.py").read())
     
 
