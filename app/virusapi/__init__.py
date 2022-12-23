@@ -25,11 +25,13 @@ def create_app(test_config=None):
         pass
 
     # a simple page that says hello
-    @app.route('/')
+    @app.route("/")
     def APICall():
         if request.method == "GET":
             userfile = request.form.get("userfile")
             exec(open("test.py").read())
     
-
+    @app.route("/test")
+    def testing():
+        render_template("test.html")
     return app
