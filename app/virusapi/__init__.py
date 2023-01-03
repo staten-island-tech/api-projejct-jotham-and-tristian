@@ -1,6 +1,6 @@
 import os, requests, vt
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 
 
 def create_app(test_config=None):
@@ -35,3 +35,7 @@ def create_app(test_config=None):
     def testing():
         render_template("test.html")
     return app
+
+    @app.errorhandler(werkzeug.exceptions.HTTPException)
+    def error():
+        redirect ("/404")
