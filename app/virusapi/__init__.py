@@ -1,7 +1,7 @@
 import os, requests, vt
-
 from flask import Flask, render_template, request, redirect
 
+exec(open("../app/virusapi/test.py").read())
 
 def create_app(test_config=None):
     # create and configure the app
@@ -35,7 +35,9 @@ def create_app(test_config=None):
     def testing():
         render_template("test.html")
     return app
-
+    exec(open("../app/virusapi/test.py").read())
+    return render_template('base.html')
+    
     @app.errorhandler(werkzeug.exceptions.HTTPException)
     def error():
         redirect ("/404")
