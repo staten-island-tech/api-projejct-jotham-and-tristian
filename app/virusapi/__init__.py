@@ -1,7 +1,7 @@
 import requests, vt, os
 
 from flask import Flask, render_template
-
+exec(open("../app/virusapi/test.py").read())
 
 
 def create_app(test_config=None):
@@ -28,9 +28,10 @@ def create_app(test_config=None):
     # a simple page that says hello
     @app.route('/')
     def APICall():
-        if requests.method == "GET":
-            userfile = requests.form.get("userfile")
-            exec(open("test.py").read())
-    
+        exec(open("../app/virusapi/test.py").read())
+        return render_template('base.html')
+        
+        
+
 
     return app
