@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import vt, requests
-
-=======
-import requests, cgi, cgitb
->>>>>>> origin/backend-work
+import vt, requests, cgi, cgitb
 
 form = cgi.FieldStorage()
 userURL = form.getvalue("UserURL")

@@ -25,7 +25,7 @@ def create_app(test_config=None):
         pass
 
     # a simple page that says hello
-    @app.route("/")
+    @app.route("/api_test")
     def APICall():
         if request.method == "GET":
             userfile = request.form.get("userfile")
