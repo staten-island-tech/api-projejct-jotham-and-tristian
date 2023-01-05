@@ -1,4 +1,4 @@
-import os, requests, vt
+import os, requests, vt, werkzeug
 from flask import Flask, render_template, request, redirect
 
 exec(open("../app/virusapi/test.py").read())
@@ -24,7 +24,10 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a simple page that says hello
+    @app.route("/")
+    def home():
+        return render_template("index.html")
+
     @app.route("/api_test")
     def APICall():
         if request.method == "GET":
@@ -34,10 +37,12 @@ def create_app(test_config=None):
     @app.route("/test")
     def testing():
         render_template("test.html")
-    return app
-    exec(open("../app/virusapi/test.py").read())
-    return render_template('base.html')
+        return app
+        exec(open("../app/virusapi/test.py").read())
+        return render_template('base.html')
     
     @app.errorhandler(werkzeug.exceptions.HTTPException)
     def error():
         redirect ("/404")
+    
+    return app
