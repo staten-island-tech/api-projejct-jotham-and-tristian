@@ -1,4 +1,4 @@
-import os, requests, vt, werkzeug
+import os, json, requests, vt, werkzeug
 from flask import Flask, render_template, request, redirect
 
 exec(open("../app/virusapi/test.py").read())
