@@ -1,4 +1,4 @@
-import requests, cgi, cgitb, json
+import vt, requests, cgi, cgitb, json
 
 form = cgi.FieldStorage()
 userURL = form.getvalue("UserURL")

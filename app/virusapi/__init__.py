@@ -1,8 +1,7 @@
-import requests, vt, os
-from virusapi import test
-from flask import Flask, render_template
-exec(open("../app/virusapi/test.py").read())
+import os, json, requests, vt, werkzeug
+from flask import Flask, render_template, request, redirect
 
+exec(open("../app/virusapi/test.py").read())
 
 def create_app(test_config=None):
     # create and configure the app
@@ -40,5 +39,25 @@ def create_app(test_config=None):
         return render_template('test.html')
     
 
+    #@app.route("/")
+    #def home():
+    #    return render_template("index.html")
 
-    return app
+    #@app.route("/api_test")
+    #def APICall():
+    #    if request.method == "GET":
+    #        userfile = request.form.get("userfile")
+    #        exec(open("test.py").read())
+    
+    #@app.route("/test")
+    #def testing():
+    #    render_template("test.html")
+    #    return app
+    #    exec(open("../app/virusapi/test.py").read())
+    #    return render_template('base.html')
+    
+    #@app.errorhandler(werkzeug.exceptions.HTTPException)
+    #def error():
+    #    redirect ("/404")
+    
+    #return app
