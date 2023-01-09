@@ -1,5 +1,5 @@
-import os, requests, vt
-
+import requests, vt, os
+from virusapi import test
 from flask import Flask, render_template
 exec(open("../app/virusapi/test.py").read())
 
@@ -26,12 +26,19 @@ def create_app(test_config=None):
         pass
 
     # a simple page that says hello
-    @app.route('/')
-    def APICall():
+    @app.route('/', methods=('GET','POST'))
+    def Startup():
         exec(open("../app/virusapi/test.py").read())
         return render_template('base.html')
-        
-        
+
+    @app.route('/threatanalysis/<status>')
+    def APICall(status):
+        exec(open("../app/virusapi/test.py").read())
+        return render_template('base.html',test=test)
+    @app.route('/test')
+    def test():
+        return render_template('test.html')
+    
 
 
     return app

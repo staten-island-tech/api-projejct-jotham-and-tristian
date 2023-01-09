@@ -1,23 +1,13 @@
-import requests, cgi, cgitb
+import requests, cgi, cgitb, json
 
 form = cgi.FieldStorage()
 userURL = form.getvalue("UserURL")
 userfile = form.getvalue("userFile")
 
-def FileChecker():
-    url = "https://www.virustotal.com/api/v3/files"
-    files = {"file": (userfile, open(userfile, "rb"), "image/jpeg")}
-    headers = {
-    "accept": "application/json",
-    "x-apikey": "29909ddf2acb1233e0cab2142ec6ea733e786e4d97ea4b631e70860acf0c61c6"
-    }
-    
-    response = requests.post(url, files=files, headers=headers)
-
-    print(response.text)
 
 
-def URLChecker():
+
+def URLChecker(userURL):
     url = "https://www.virustotal.com/api/v3/urls"
 
     payload = userURL
@@ -28,7 +18,9 @@ def URLChecker():
     }
 
     response = requests.post(url, data=payload, headers=headers)
+    data = response.text
+    parse_json = json.loads(data)
 
-    print(response.text)
-
+    
+URLChecker(userURL)
 
