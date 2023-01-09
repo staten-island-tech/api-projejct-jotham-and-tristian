@@ -1,4 +1,4 @@
-import requests, cgi, cgitb
+import requests, cgi, cgitb, json
 
 form = cgi.FieldStorage()
 userURL = form.getvalue("UserURL")
@@ -18,8 +18,9 @@ def URLChecker(userURL):
     }
 
     response = requests.post(url, data=payload, headers=headers)
+    data = response.text
+    parse_json = json.loads(data)
 
-    print(response.text)
-
+    
 URLChecker(userURL)
 
