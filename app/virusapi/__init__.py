@@ -1,6 +1,6 @@
 import os, json, requests, vt, werkzeug
 from flask import Flask, render_template, request, redirect
-
+from virusapi import test
 exec(open("../app/virusapi/test.py").read())
 
 def create_app(test_config=None):
@@ -34,11 +34,16 @@ def create_app(test_config=None):
     def APICall(status):
         exec(open("../app/virusapi/test.py").read())
         return render_template('base.html',test=test)
+    
     @app.route('/test')
     def test():
         return render_template('test.html')
-    
 
+    @app.errorhandler(werkzeug.exceptions.HTTPException)
+    def error():
+        redirect ("/404")
+    
+    return app
     #@app.route("/")
     #def home():
     #    return render_template("index.html")
@@ -56,8 +61,5 @@ def create_app(test_config=None):
     #    exec(open("../app/virusapi/test.py").read())
     #    return render_template('base.html')
     
-    #@app.errorhandler(werkzeug.exceptions.HTTPException)
-    #def error():
-    #    redirect ("/404")
     
     #return app
