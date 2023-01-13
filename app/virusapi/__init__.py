@@ -1,6 +1,6 @@
 import os, json, requests, vt, werkzeug
 from flask import Flask, render_template, request, redirect
-from virusapi import test
+
 exec(open("../app/virusapi/test.py").read())
 
 def create_app(test_config=None):
@@ -27,17 +27,49 @@ def create_app(test_config=None):
     # a simple page that says hello
     @app.route('/', methods=('GET','POST'))
     def Startup():
-        exec(open("../app/virusapi/test.py").read())
         return render_template('base.html')
-
-    @app.route('/threatanalysis/<status>')
+    @app.route('/threatanalysis/<status>', methods=('GET','POST'))
     def APICall(status):
-        exec(open("../app/virusapi/test.py").read())
-        return render_template('base.html',test=test)
-    
-    @app.route('/test')
-    def test():
-        return render_template('test.html')
+        try:
+            if request.method == 'POST':
+                
+                userURL = request.form('UserURL')
+                
+                def URLsender(userURL):
+                    url = "https://www.virustotal.com/api/v3/urls"
+
+                    payload = (f"url={userURL}")
+                    headers = {
+                    "accept": "application/json",
+                    "x-apikey": "29909ddf2acb1233e0cab2142ec6ea733e786e4d97ea4b631e70860acf0c61c6",
+                    "content-type": "application/x-www-form-urlencoded"
+                    }
+
+                    response = requests.post(url, data=payload, headers=headers)
+                    responsedata = json.loads(response.text)
+                    for x in responsedata:      
+                        URLpadded = responsedata["data"]["id"]
+                        URLhash = URLpadded[2:66]
+                            
+                        def AnalysisReport(URLhash):
+                            url = (f"https://www.virustotal.com/api/v3/urls/{URLhash}")
+
+                            headers = {
+                            "accept": "application/json",
+                            "x-apikey": "29909ddf2acb1233e0cab2142ec6ea733e786e4d97ea4b631e70860acf0c61c6"
+                            }
+
+                            response = requests.get(url, headers=headers)
+                            data = json.loads(response.text)
+                            print(data)
+                        AnalysisReport(URLhash)
+
+                        URLsender(userURL)
+            return render_template('test.html')
+        except:
+            @app.errorhandler(werkzeug.execeptions.HTTPException)
+            def error():
+                redirect ("/404") 
 
     @app.errorhandler(werkzeug.exceptions.HTTPException)
     def error():
