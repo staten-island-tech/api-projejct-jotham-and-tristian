@@ -22,10 +22,14 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a simple page that says hello
+    @app.errorhandler(werkzeug.exceptions.HTTPException)
+    def error():
+        redirect ("/404")
+
     @app.route('/', methods=('GET','POST'))
     def Startup():
         return render_template('base.html')
+    
     @app.route('/threatanalysis/<status>', methods=('GET','POST'))
     def APICall(status):
         try:
@@ -69,10 +73,9 @@ def create_app(test_config=None):
             def error():
                 redirect ("/404") 
 
-    @app.errorhandler(werkzeug.exceptions.HTTPException)
+    @app.route("/404")
     def error():
-        redirect ("/404")
-    
+        return render_template("404.html") 
     return app
     #@app.route("/")
     #def home():
