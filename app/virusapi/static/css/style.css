@@ -6,17 +6,18 @@ body {
 
 h1{
     font-size: 45pt;
-    font-weight: 700
+    font-weight: 700;
+    margin-top: 500px;
 }
 
 h2{
     font-size: 32pt;
-    font-weight: 700
+    font-weight: 700;
 }
 
 h5{
     font-size: 27pt;
-    font-weight: 700
+    font-weight: 700;
 }
 
 .align-center{
@@ -25,6 +26,10 @@ h5{
 }
 
 .align-right{
-    text-align: right;
     align-content: right;
+}
+
+.regular-text{
+margin-left: 30%;
+margin-right: 30%;
 }
