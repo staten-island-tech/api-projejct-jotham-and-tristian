@@ -1,13 +1,10 @@
-def FileChecker(userfile):
-    url = "https://www.virustotal.com/api/v3/files"
-    files = {"file": (userfile, open(userfile))}
-    headers = {
-    "accept": "application/json",
-    "x-apikey": "29909ddf2acb1233e0cab2142ec6ea733e786e4d97ea4b631e70860acf0c61c6"
-    }
-    
-    response = requests.post(url, files=files, headers=headers)
-
-    print(response.text)
-
-FileChecker(userfile)
+    @app.route('/threatanalysis/<status>')
+    def APICall(status):
+        try:
+            for x in test["responsedata1"]:
+                exec(open("../app/virusapi/test.py").read())
+            return render_template('test.html',test=test)
+        except:
+        @app.errorhandler(werkzeug.execeptions.HTTPException)
+        def error():
+            redirect ("/404") 
