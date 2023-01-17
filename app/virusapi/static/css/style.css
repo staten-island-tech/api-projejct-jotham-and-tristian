@@ -7,7 +7,8 @@ body {
 h1{
     font-size: 45pt;
     font-weight: 700;
-    margin-top: 500px;
+    margin-top: 56px;
+    margin-bottom: 19px;
 }
 
 h2{
@@ -27,6 +28,15 @@ h5{
 
 .align-right{
     align-content: right;
+}
+
+.flex-container{
+    align-content: center;
+}
+
+.goofy-virus-img{
+    border-radius: 20px;
+    border-color: #00d700;
 }
 
 .regular-text{
