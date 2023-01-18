@@ -1,6 +1,6 @@
 import requests, os, werkzeug, json
 from flask import Flask, render_template, redirect, request
-from APIRequests import URLsender
+
 
 
 
@@ -33,13 +33,43 @@ def create_app(test_config=None):
     @app.route('/404')
     def errorpage():
         return render_template('404.html')
-    @app.route('/UserURL', methods=['GET','POST'])
+    @app.route(f'/UserURL', methods=['GET','POST'])
     def APICall():
         global URL
         URL = request.form['UserURL']
         #try:
+        def URLsender(URL):
+            url = "https://www.virustotal.com/api/v3/urls"
+
+            payload = (f"url={URL}")
+            headers = {
+            "accept": "application/json",
+            "x-apikey": "29909ddf2acb1233e0cab2142ec6ea733e786e4d97ea4b631e70860acf0c61c6",
+            "content-type": "application/x-www-form-urlencoded"
+            }
+
+
+            response = requests.post(url, data=payload, headers=headers)
+            responsedata = json.loads(response.text)
+            for data in responsedata:
+                URLpadded = responsedata["data"]["id"]
+                global URLhash
+                URLhash = URLpadded[2:66]
+            def AnalysisReport(URLhash):
+                url = (f"https://www.virustotal.com/api/v3/urls{URLhash}")
+
+                headers = {
+                "accept": "application/json",
+                "x-apikey": "29909ddf2acb1233e0cab2142ec6ea733e786e4d97ea4b631e70860acf0c61c6"
+                }
+                global data1
+                response = requests.get(url, headers=headers)
+                data1 = json.loads(response.text)
+
+            AnalysisReport(URLhash)
         URLsender(URL)
-        return render_template('results.html',  data=data)
+
+        return render_template('results.html',  data1=data1)
         #except:
             #return render_template("404.html")
 
