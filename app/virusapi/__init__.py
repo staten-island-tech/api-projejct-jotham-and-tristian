@@ -56,7 +56,7 @@ def create_app(test_config=None):
                 global URLhash
                 URLhash = URLpadded[2:66]
             def AnalysisReport(URLhash):
-                url = (f"https://www.virustotal.com/api/v3/urls{URLhash}")
+                url = (f"https://www.virustotal.com/api/v3/urls/{URLhash}")
 
                 headers = {
                 "accept": "application/json",
@@ -65,11 +65,15 @@ def create_app(test_config=None):
                 global data1
                 response = requests.get(url, headers=headers)
                 data1 = json.loads(response.text)
+                for x in data1:
+                    global result
+                    result = data1["data"]["attributes"]["total_votes"]
+                
 
             AnalysisReport(URLhash)
         URLsender(URL)
 
-        return render_template('results.html',  data1=data1)
+        return render_template('results.html',  result=result)
         #except:
             #return render_template("404.html")
 
