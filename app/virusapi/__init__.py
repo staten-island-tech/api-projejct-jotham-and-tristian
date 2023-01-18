@@ -1,6 +1,7 @@
 import requests, os, werkzeug, json
-from APIRequests import *
 from flask import Flask, render_template, redirect, request
+from APIRequests import URLsender
+
 
 
 
@@ -36,12 +37,11 @@ def create_app(test_config=None):
     def APICall():
         global URL
         URL = request.form['UserURL']
-        try:
-            URLsender(URL)
-            AnalysisReport(URLhash)
-            return render_template('results.html', data=data)
-        except:
-            return render_template("404.html")
+        #try:
+        URLsender(URL)
+        return render_template('results.html',  data=data)
+        #except:
+            #return render_template("404.html")
 
 
     return app
