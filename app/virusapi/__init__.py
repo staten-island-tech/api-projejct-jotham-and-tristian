@@ -1,5 +1,10 @@
-import os, json, requests, vt, werkzeug
-from flask import Flask, render_template, request, redirect
+import requests, os, werkzeug, json
+from flask import Flask, render_template, redirect, request
+from APIRequests import URLsender
+
+
+
+exec(open("../app/virusapi/test.py").read())
 
 def create_app(test_config=None):
     # create and configure the app
@@ -72,6 +77,22 @@ def create_app(test_config=None):
             @app.errorhandler(werkzeug.execeptions.HTTPException)
             def error():
                 redirect ("/404") 
+    # a simple page that says hello
+    @app.route('/')
+    def Startup():
+        return render_template('base.html')
+    @app.route('/404')
+    def errorpage():
+        return render_template('404.html')
+    @app.route('/UserURL', methods=['GET','POST'])
+    def APICall():
+        global URL
+        URL = request.form['UserURL']
+        #try:
+        URLsender(URL)
+        return render_template('results.html',  data=data)
+        #except:
+            #return render_template("404.html")
 
     @app.route("/404")
     def error():
