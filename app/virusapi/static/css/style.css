@@ -43,3 +43,25 @@ h5{
     margin-left: 30%;
     margin-right: 30%;
 }
+
+.topnav a{
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+
+.topnav a:hover{
+    background-color: #00d767;
+    color: black;
+    font-family: "Source Code Pro";
+    transition-duration: 200ms;
+}
+
+.topnav a.active {
+    background-color: #00d700;
+    color: black;
+}
