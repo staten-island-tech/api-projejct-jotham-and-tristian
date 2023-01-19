@@ -182,3 +182,12 @@ app/Scripts/flask.exe
 app/pyvenv.cfg
 app/Scripts/activate
 app/Scripts/activate.bat
+app/pyvenv.cfg
+app/pyvenv.cfg
+app/Scripts/activate
+app/Scripts/activate.bat
+app/Scripts/flask.exe
+app/Scripts/normalizer.exe
+app/Scripts/pip.exe
+app/Scripts/pip3.10.exe
+app/Scripts/pip3.exe
