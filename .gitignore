@@ -191,3 +191,7 @@ app/Scripts/normalizer.exe
 app/Scripts/pip.exe
 app/Scripts/pip3.10.exe
 app/Scripts/pip3.exe
+app/Scripts/flask.exe
+app/Scripts/normalizer.exe
+app/Scripts/pip.exe
+app/Scripts/pip3.exe
