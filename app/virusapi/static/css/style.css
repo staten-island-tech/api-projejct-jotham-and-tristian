@@ -1,0 +1,67 @@
+body {
+    background-color: black;
+    font-family: "Source Code Pro";
+    color: #00d700;
+}
+
+h1{
+    font-size: 45pt;
+    font-weight: 700;
+    margin-top: 56px;
+    margin-bottom: 19px;
+}
+
+h2{
+    font-size: 32pt;
+    font-weight: 700;
+}
+
+h5{
+    font-size: 27pt;
+    font-weight: 700;
+}
+
+.align-center{
+    text-align: center;
+    align-content: center;
+}
+
+.align-right{
+    align-content: right;
+}
+
+.flex-container{
+    align-content: center;
+}
+
+.goofy-virus-img{
+    border-radius: 20px;
+    border-color: #00d700;
+}
+
+.regular-text{
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.topnav a{
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+
+.topnav a:hover{
+    background-color: #00d767;
+    color: black;
+    font-family: "Source Code Pro";
+    transition-duration: 200ms;
+}
+
+.topnav a.active {
+    background-color: #00d700;
+    color: black;
+}

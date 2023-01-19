@@ -2,10 +2,6 @@ import requests, os, werkzeug, json
 from flask import Flask, render_template, redirect, request, url_for
 
 
-
-
-exec(open("../app/virusapi/test.py").read())
-
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
@@ -30,7 +26,7 @@ def create_app(test_config=None):
     # a simple page that says hello
     @app.route('/', methods=['GET','POST'])
     def Startup():
-        return render_template('base.html')
+        return render_template('index.html')
     @app.route('/404')
     def errorpage():
         return render_template('404.html')
@@ -82,6 +78,19 @@ def create_app(test_config=None):
     def results(hash):
         return render_template('results.html',  result=result)
 
+    @app.route("/404")
+    def error():
+        return render_template("404.html") 
+    @app.route('/about')
+    def aboutpage():
+        return render_template('about.html')
+    @app.route('/threats')
+    def threatpage():
+        return render_template('threat_categories.html')
+    @app.route('/base', methods=['GET','POST'])
+    def base():
+        return render_template('base.html')
+    return app
     #@app.route("/")
     #def home():
     #    return render_template("index.html")
@@ -99,8 +108,5 @@ def create_app(test_config=None):
     #    exec(open("../app/virusapi/test.py").read())
     #    return render_template('base.html')
     
-    #@app.errorhandler(werkzeug.exceptions.HTTPException)
-    #def error():
-    #    redirect ("/404")
     
     #return app
