@@ -35,9 +35,9 @@ def create_app(test_config=None):
         return render_template('404.html')
     @app.route('/UserURL', methods=['GET','POST'])
     def APICall():
+        try:
             global URL
             URL = request.form['UserURL']
-        #try:
             def URLsender(URL):
                 url = "https://www.virustotal.com/api/v3/urls"
 
@@ -75,7 +75,7 @@ def create_app(test_config=None):
             URLsender(URL)
 
             return redirect(url_for('results',hash = URLhash))
-        #except:
+        except:
             return redirect ("/404")
     @app.route('/results/<hash>')
     def results(hash):
