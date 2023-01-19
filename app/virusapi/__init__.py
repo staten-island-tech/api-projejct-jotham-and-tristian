@@ -1,6 +1,6 @@
 import requests, os, werkzeug, json
-from flask import Flask, render_template, redirect, request
-from APIRequests import URLsender
+from flask import Flask, render_template, redirect, request, url_for
+
 
 
 
@@ -28,7 +28,7 @@ def create_app(test_config=None):
         pass
 
     # a simple page that says hello
-    @app.route('/')
+    @app.route('/', methods=['GET','POST'])
     def Startup():
         return render_template('base.html')
     @app.route('/404')
@@ -36,13 +36,51 @@ def create_app(test_config=None):
         return render_template('404.html')
     @app.route('/UserURL', methods=['GET','POST'])
     def APICall():
-        global URL
-        URL = request.form['UserURL']
-        #try:
-        URLsender(URL)
-        return render_template('results.html',  data=data)
-        #except:
-            #return render_template("404.html")
+        try:
+            global URL
+            URL = request.form['UserURL']
+            def URLsender(URL):
+                url = "https://www.virustotal.com/api/v3/urls"
+
+                payload = (f"url={URL}")
+                headers = {
+                "accept": "application/json",
+                "x-apikey": "29909ddf2acb1233e0cab2142ec6ea733e786e4d97ea4b631e70860acf0c61c6",
+                "content-type": "application/x-www-form-urlencoded"
+                }
+
+
+                response = requests.post(url, data=payload, headers=headers)
+                responsedata = json.loads(response.text)
+                for data in responsedata:
+                    URLpadded = responsedata["data"]["id"]
+                    global URLhash
+                    URLhash = URLpadded[2:66]
+                def AnalysisReport(URLhash):
+                    url = (f"https://www.virustotal.com/api/v3/urls/{URLhash}")
+
+                    headers = {
+                    "accept": "application/json",
+                    "x-apikey": "29909ddf2acb1233e0cab2142ec6ea733e786e4d97ea4b631e70860acf0c61c6"
+                    }
+                    global data1
+                    response = requests.get(url, headers=headers)
+                    data1 = json.loads(response.text)
+                    for x in data1:
+                        global result
+                        result = data1["data"]["attributes"]["total_votes"]
+                        
+                
+
+                AnalysisReport(URLhash)
+            URLsender(URL)
+
+            return redirect(url_for('results',hash = URLhash))
+        except:
+            return redirect ("/404")
+    @app.route('/results/<hash>')
+    def results(hash):
+        return render_template('results.html',  result=result)
 
     #@app.route("/")
     #def home():
