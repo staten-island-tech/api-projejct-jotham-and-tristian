@@ -2,6 +2,9 @@ import requests, os, werkzeug, json
 from flask import Flask, render_template, redirect, request, url_for
 
 
+
+
+
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
@@ -27,86 +30,36 @@ def create_app(test_config=None):
     @app.route('/', methods=['GET','POST'])
     def Startup():
         return render_template('index.html')
+    @app.route('/generator', methods=['GET','POST'])
+    def gen():
+        return render_template('base.html')
     @app.route('/404')
     def errorpage():
         return render_template('404.html')
-    @app.route('/UserURL', methods=['GET','POST'])
+    @app.route('/UserPayload', methods=['GET','POST'])
     def APICall():
-        try:
-            global URL
-            URL = request.form['UserURL']
-            def URLsender(URL):
-                url = "https://www.virustotal.com/api/v3/urls"
+            API_TOKEN = ("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")
+            global payload
+            payload = request.form.get('UserPayload')
+            print(payload)
+            headers = {"Authorization": f"Bearer {API_TOKEN}"}
+            API_URL = "https://api-inference.huggingface.co/models/1ostic/gpt2-DrSuess-generators"
+            def query(payload):
+                data = json.dumps(payload)
+                global response
+                response = requests.request("POST", API_URL, headers=headers, data=data)
+                return json.loads(response.content.decode("utf-8"))
+            data = query(payload)
+            for x in data:
+                modelresponse = x["generated_text"]
+                generatedtext = []
+                generatedtext.append(modelresponse)
 
-                payload = (f"url={URL}")
-                headers = {
-                "accept": "application/json",
-                "x-apikey": "29909ddf2acb1233e0cab2142ec6ea733e786e4d97ea4b631e70860acf0c61c6",
-                "content-type": "application/x-www-form-urlencoded"
-                }
-
-
-                response = requests.post(url, data=payload, headers=headers)
-                responsedata = json.loads(response.text)
-                for data in responsedata:
-                    URLpadded = responsedata["data"]["id"]
-                    global URLhash
-                    URLhash = URLpadded[2:66]
-                def AnalysisReport(URLhash):
-                    url = (f"https://www.virustotal.com/api/v3/urls/{URLhash}")
-
-                    headers = {
-                    "accept": "application/json",
-                    "x-apikey": "29909ddf2acb1233e0cab2142ec6ea733e786e4d97ea4b631e70860acf0c61c6"
-                    }
-                    global data1
-                    response = requests.get(url, headers=headers)
-                    data1 = json.loads(response.text)
-                    for x in data1:
-                        global result
-                        result = data1["data"]["attributes"]["total_votes"]
-                        
                 
+                return redirect(url_for('results',generatedtext=generatedtext))
+    @app.route('/results/<generatedtext>')
+    def results(generatedtext):
+        return render_template('results.html',  generatedtext=generatedtext)
 
-                AnalysisReport(URLhash)
-            URLsender(URL)
 
-            return redirect(url_for('results',hash = URLhash))
-        except:
-            return redirect ("/404")
-    @app.route('/results/<hash>')
-    def results(hash):
-        return render_template('results.html',  result=result)
-
-    @app.route("/404")
-    def error():
-        return render_template("404.html") 
-    @app.route('/about')
-    def aboutpage():
-        return render_template('about.html')
-    @app.route('/threats')
-    def threatpage():
-        return render_template('threat_categories.html')
-    @app.route('/base', methods=['GET','POST'])
-    def base():
-        return render_template('base.html')
     return app
-    #@app.route("/")
-    #def home():
-    #    return render_template("index.html")
-
-    #@app.route("/api_test")
-    #def APICall():
-    #    if request.method == "GET":
-    #        userfile = request.form.get("userfile")
-    #        exec(open("test.py").read())
-    
-    #@app.route("/test")
-    #def testing():
-    #    render_template("test.html")
-    #    return app
-    #    exec(open("../app/virusapi/test.py").read())
-    #    return render_template('base.html')
-    
-    
-    #return app
