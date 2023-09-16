@@ -91,6 +91,7 @@ def create_app(test_config=None):
     def base():
         return render_template('base.html')
     return app
+    
     #@app.route("/")
     #def home():
     #    return render_template("index.html")
